@@ -6,6 +6,7 @@ import * as api from "../../services/api";
 import  Disciplines from '../../components/Disciplines';
 import Teachers from '../../components/Teachers';
 import Navbar from '../../components/Navbar';
+import Header from "../../components/Header";
 
 
 export default function Homepage() {
@@ -38,8 +39,8 @@ export default function Homepage() {
         teacher
       })
     }
-    catch {
-      console.log(console.error)
+    catch(error) {
+      console.log(error)
     }
   }
 
@@ -51,6 +52,7 @@ export default function Homepage() {
 
   return (
     <Container component="main" maxWidth="xl">
+      <Header isLoggedIn={true} />
       <Navbar
         option={tabs}
         handleChange={handleChange}
@@ -66,7 +68,6 @@ export default function Homepage() {
             ? <Teachers repository={repository.teacher} />
             : <></>
         }
-
       </Container >
     </Container>
   );

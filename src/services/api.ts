@@ -71,12 +71,8 @@ export async function signIn(formData: FormData) {
 export async function disciplineData(token: string) {
 
     const categories: any[] = await getAllCategories(token)
-  
     const terms: any[] = await getAllTerms(token)
-  
     const teachers: any[] = await getAllTeachers(token)
-  
-  
     const data = terms.map(term => {
       return {
         termId: term.id,
@@ -85,7 +81,7 @@ export async function disciplineData(token: string) {
           return {
             disciplineId: discipline.id,
             disciplineName: discipline.name,
-            teacherDisciplines: discipline.teachersDisciplines.map((teacherDiscipline: any) => {
+            teacherDisciplines: discipline.teacherDisciplines.map((teacherDiscipline: any) => {
               return {
                 categories: categories.map(category => {
                   return {
@@ -108,26 +104,28 @@ export async function disciplineData(token: string) {
         })
       }
     })
-  
+    console.log(data);
     return data
   }
+  
   
   
   export async function teachersData(token: string) {
   
     const categories: any[] = await getAllCategories(token)
-  
+
     const teachers: any[] = await getAllTeachers(token)
-  
+
     const disciplines: any[] = await getAllDisciplines(token)
   
     const data = teachers.map(teacher => {
-  
-      const tests = teacher.teachersDisciplines.map((teachersDiscipline: any) => {
+      console.log(teacher);
+
+      const tests = teacher.teacherDisciplines?.map((teachersDiscipline: any) => {
         return categories.reduce(function (result: any[], category: any) {
-  
+        //  category.tests.map((test:any)=> console.log(test))
           const tests = category.tests.filter((test: any) => test.teacherDisciplineId === teachersDiscipline.id)
-  
+          
           if (tests.length !== 0) {
             const newObject = {
               categoryId: category.id,
@@ -136,9 +134,11 @@ export async function disciplineData(token: string) {
             }
             result.push(newObject)
           }
+          
           return result
         }, [])
-      }).reduce((a: any, b: any) => [...a, ...b], [])
+      }).reduce((a: any, b: any) =>
+      [...a, ...b], [])
   
       return {
         teacherId: teacher.id,
@@ -155,15 +155,15 @@ export async function disciplineData(token: string) {
                       testName: el.name,
                       testId: el.id,
                       testPdfUrl: el.pdfUrl,
-                      testDisciplineId: el.teachersDisciplines.disciplineId,
-                      testDisciplineName: disciplines.find((discipline: any) => discipline.id === el.teachersDisciplines.disciplineId).name
+                      testDisciplineId: el.teacherDiscipline.disciplineId,
+                      testDisciplineName: disciplines.find((discipline: any) => discipline.id === el.teacherDiscipline.disciplineId).name
                     }
                   })
           }
         })
       }
     })
-  
+    console.log(data);
     return data
   }
   
