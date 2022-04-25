@@ -11,7 +11,6 @@ const styleList ={
 }
 
 export default function Teachers({ repository }: any) {
-  console.log(repository)
   return (
     <List
       sx={styleList}

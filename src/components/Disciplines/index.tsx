@@ -13,8 +13,7 @@ const styleList ={
 }
 
 export default function Disciplines({ repository }: any) {
-  console.log("ooooooooooooooooooooooooooooooi")
-  console.log(repository)
+ 
   return (
     <List
       sx={styleList}

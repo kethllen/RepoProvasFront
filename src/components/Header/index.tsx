@@ -17,7 +17,7 @@ export default function Header({ isLoggedIn }: HeaderProps) {
     function handleLogout() {
         localStorage.removeItem('token');
         setToken(null);
-        navigate('/sign-in');
+        navigate('/');
     }
 
     return (

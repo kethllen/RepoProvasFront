@@ -3,8 +3,6 @@ import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 
@@ -32,7 +30,7 @@ export default function Category({ children, name }: any) {
           {name}
         </Typography>
         } />
-        {showCategory ? <ExpandLess color="secondary" /> : <ExpandMore sx={{ color:'#111111'}}/>}
+        
       </ListItemButton>
       <Collapse in={showCategory} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>

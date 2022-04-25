@@ -104,28 +104,25 @@ export async function disciplineData(token: string) {
         })
       }
     })
-    console.log(data);
     return data
   }
   
   
-  
   export async function teachersData(token: string) {
-  
+
     const categories: any[] = await getAllCategories(token)
-
+  
     const teachers: any[] = await getAllTeachers(token)
-
+  
     const disciplines: any[] = await getAllDisciplines(token)
   
     const data = teachers.map(teacher => {
-      console.log(teacher);
-
+  
       const tests = teacher.teacherDisciplines?.map((teachersDiscipline: any) => {
         return categories.reduce(function (result: any[], category: any) {
-        //  category.tests.map((test:any)=> console.log(test))
+  
           const tests = category.tests.filter((test: any) => test.teacherDisciplineId === teachersDiscipline.id)
-          
+  
           if (tests.length !== 0) {
             const newObject = {
               categoryId: category.id,
@@ -134,11 +131,9 @@ export async function disciplineData(token: string) {
             }
             result.push(newObject)
           }
-          
           return result
         }, [])
-      }).reduce((a: any, b: any) =>
-      [...a, ...b], [])
+      }).reduce((a: any, b: any) => [...a, ...b], [])
   
       return {
         teacherId: teacher.id,
@@ -163,7 +158,6 @@ export async function disciplineData(token: string) {
         })
       }
     })
-    console.log(data);
     return data
   }
-  
+
